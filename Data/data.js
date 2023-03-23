@@ -1,8 +1,8 @@
 import { Pokedex } from "../Classes/PokedexClass";
 
 export const REGION =[
-  // new Pokedex('Kanto','151','0'),
-  {area:'Kanto',limit:'151',offset:'0',tabPokedex:[]}
+  new Pokedex('Kanto','151','0'),
+  // {area:'Kanto',limit:'151',offset:'0',PokemonList:[]}
   // new Pokedex('Johto','100','151'),
   // new Pokedex('Hoenn','135','251'),
   // new Pokedex('Sinnoh','107','386'),
