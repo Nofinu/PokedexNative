@@ -5,9 +5,7 @@ export const getDarkMode = createAsyncThunk(
   "DarkModeSlice/getDarkMode",
   async()=>{
     const response = await AsyncStorage.getItem('Darkmode')
-    console.log(response)
     const data = JSON.parse(response)
-    console.log(data)
     return(data)
   }
 )

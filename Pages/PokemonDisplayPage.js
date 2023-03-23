@@ -1,9 +1,13 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image,ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import DarkModeComponent from '../Component/DarkModeComponent/DarkModeComponent'
 import { getInfoPokemon } from '../Services/data.service'
+import { useNavigation } from '@react-navigation/native'
+import ButtonPokeball from '../Component/ButtonPokeball'
 
 export default function PokemonDisplayPage({route}) {
+
+  const navigation = useNavigation()
 
   const [pokemonNumber,setPokemonNumber]=useState(route.params.idPokemon)
   const [pokemonData,setPokemonData]=useState({})
@@ -43,7 +47,7 @@ export default function PokemonDisplayPage({route}) {
         return( require('../asset/Type_ice.png'))
       case"normal":
         return( require('../asset/Type_normal.png'))
-      case"poisson":
+      case"poison":
         return( require('../asset/Type_poison.png'))
       case"psychic":
         return( require('../asset/Type_psychic.png'))
@@ -62,32 +66,40 @@ export default function PokemonDisplayPage({route}) {
 
   useEffect(()=>{
     fetchPokemonInfo()
+    navigation.setOptions({headerRight:()=><ButtonPokeball number={pokemonNumber}/>})
   },[pokemonNumber])
 
-  console.log("pokemondata",pokemonData.abilities)
   return (
     <DarkModeComponent>
       <View style={styles.container}>
         <Text style={styles.text}>{pokemonNumber} {route.params.pokemonName}</Text>
-        <View style={styles.imageContainer}>
+        <View style={styles.pokemonContainer}>
+          <View style={styles.typeContainer}>
+            {
+              pokemonData.types !== undefined ?
+              
+              pokemonData.types.map((types,index) => {
+                const path = findType(types.type.name)
+              return <Image key={index} source={path} style={{height:20,width:120,marginLeft:10}}/>
+            })
+            :
+            <ActivityIndicator/>
+            }
+          </View>
+            {
+              pokemonData.sprites !== undefined ?
+                <Image source={{uri:pokemonData.sprites.front_default}} style={[{height:300,width:300},styles.pokemonImage]}/>
+                :
+                <ActivityIndicator/>
+            }
+          <View style={styles.abilityContainer}>
           {
-            pokemonData.types !== undefined &&
-            
-            pokemonData.types.map((types,index) => {
-              const path = findType(types.type.name)
-            return <Image key={index} source={path} style={{height:20,width:120}}/>
-          })
+            pokemonData.abilities !== undefined ?
+            pokemonData.abilities.map((ability,index)=><Text key={index} style={styles.textAbility}>{ability.ability.name}</Text>)
+            :
+            <ActivityIndicator/>
           }
-        </View>
-        {
-          pokemonData.sprites !== undefined &&
-            <Image source={{uri:pokemonData.sprites.front_default}} style={{height:300,width:300,}}/>
-        }
-        <View>
-        {
-          pokemonData.abilities !== undefined &&
-          pokemonData.abilities.map((ability,index)=><Text style={styles.text}>{ability.ability.name}</Text>)
-        }
+          </View>
         </View>
       </View>
     </DarkModeComponent>
@@ -100,11 +112,41 @@ const styles = StyleSheet.create({
     alignItems:"center"
   },
   text:{
-    color:"white"
+    textAlign:"center",
+    width:250,
+    color:"black",
+    fontSize:32,
+    backgroundColor:"white",
+    borderRadius:10,
+    marginBottom:20
   },
-  imageContainer:{
+  pokemonContainer:{
+    backgroundColor:"red",
+    borderRadius:10,
+    padding:5,
+    justifyContent:"center",
+    alignItems:"center"
+  },
+  pokemonImage:{
+    borderRadius:10,
+    backgroundColor:"white",
+  },  
+  typeContainer:{
     flexDirection:"row",
     justifyContent:"space-evenly",
     marginTop:15,
+    height:25,
+  },
+  abilityContainer:{
+    width:280,
+    backgroundColor:"white",
+    borderRadius:10,
+    marginTop:10,
+    marginBottom:10
+  },
+  textAbility:{
+    textAlign:"center",
+    fontSize:20,
+    color:"black"
   }
 })

@@ -1,8 +1,8 @@
-import { StyleSheet, Text, SafeAreaView } from 'react-native'
-import React, { useEffect, useLayoutEffect } from 'react'
+import { StyleSheet, SafeAreaView } from 'react-native'
+import React, {  useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
-import { getDarkMode } from '../../Data/DarkmodeSlice'
+import { useSelector } from 'react-redux'
+
 
 export default function DarkModeComponent(props) {
   const navigation = useNavigation()

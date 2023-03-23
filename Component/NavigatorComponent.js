@@ -5,6 +5,7 @@ import HomePage from '../Pages/HomePage'
 import PokedexPage from '../Pages/PokedexPage'
 import ButtonDarkMode from './DarkModeComponent/ButtonDarkMode'
 import PokemonDisplayPage from '../Pages/PokemonDisplayPage'
+import ButtonPokeball from './ButtonPokeball'
 
 export default function NavigatorComponent() {
 
@@ -13,7 +14,7 @@ export default function NavigatorComponent() {
     <Stack.Navigator screenOptions={{headerTitleAlign:"center",headerTitleStyle:{fontSize:28},}}>
       <Stack.Screen name='home' component={HomePage} options={{title:"Pokedex",headerRight:()=><ButtonDarkMode/>}}/>
       <Stack.Screen name='pokedex' component={PokedexPage} />
-      <Stack.Screen name='pokemon' component={PokemonDisplayPage}/>
+      <Stack.Screen name='pokemon' component={PokemonDisplayPage} options={{title:""}}/>
     </Stack.Navigator>
   )
 }

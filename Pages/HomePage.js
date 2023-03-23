@@ -6,7 +6,7 @@ import DarkModeComponent from '../Component/DarkModeComponent/DarkModeComponent'
 import { getDarkMode } from '../Data/DarkmodeSlice'
 
 
-export default function HomePage({navigation}) {
+export default function HomePage() {
 
   const dispatch = useDispatch()
 
