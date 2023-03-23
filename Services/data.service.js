@@ -2,12 +2,14 @@ import axios from 'axios'
 
 
 
-export const getInfoPokedex = (limit,offset) =>{
+export const getInfoPokedex = async (limit,offset) =>{
   const urlapi =`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
-  return axios.get(urlapi);
+  const response = await axios.get(urlapi);
+  return response.data
 }
 
-export const getInfoPokemon = (urlPokemon)=>{
-  return axios.get(urlPokemon);
+export const getInfoPokemon = async (urlPokemon)=>{
+  const response = await axios.get(urlPokemon);
+  return(response.data)
 }
 

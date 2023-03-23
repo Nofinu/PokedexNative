@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
+import React, { useEffect } from 'react'
 import { useLayoutEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FetchPokedex } from '../Data/PokedexSlice';
+import PokemonDisplay from '../Component/PokemonDisplay';
 
 export default function PokedexPage({navigation,route}) {
 
@@ -10,16 +11,30 @@ export default function PokedexPage({navigation,route}) {
 
   const area = route.params.area
 
+  const pokedexList = useSelector(state=> state.PokedexData.pokedexList)
+  const pokedexFind = pokedexList.find(p=>p.area === area)
+
+  useEffect(()=>{
+    if(pokedexFind.pokemonList.length === 0){
+      dispatch(FetchPokedex(area))
+    }
+  },[])
+
   useLayoutEffect(()=>{
     navigation.setOptions({title:area})
-    dispatch(FetchPokedex(area))
   },[])
 
   return (
-    <View>
-      <Text>{area}</Text>
-    </View>
+    <FlatList numColumns={3} data={pokedexFind.pokemonList} contentContainerStyle={styles.container}
+    renderItem={({item})=>{
+      return <PokemonDisplay pokemon={item}/>
+    }} keyExtractor={(item,index) => index}/>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{
+    justifyContent:"center",
+    alignItems:"center"
+  }
+})
