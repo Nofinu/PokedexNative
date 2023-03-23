@@ -8,18 +8,20 @@ export default function ButtonPokeball(props) {
 
   const [captureState,setcaptureState]=useState(false)
   const [captureList,setCaptureList] =useState([])
+  const [firstTest,setFirstTest]=useState(true)
 
-  // const FetchCaptureListe = async()=>{
-  //   const response = await AsyncStorage.getItem('captureListe')
-  //   if(response !== null){
-  //     setCaptureList(JSON.parse(response))
-  //   }
-  // }
+  const FetchCaptureListe = async()=>{
+    const response = await AsyncStorage.getItem('captureListe')
+    if(response !== null){
+      setCaptureList(JSON.parse(response))
+    }
+    setFirstTest(false)
+  }
 
-  // const setCaptureListAsync = async()=>{
-  //   await AsyncStorage.setItem('captureListe',JSON.stringify(captureList))
-  // }
-
+  const setCaptureListAsync = async()=>{
+    await AsyncStorage.setItem('captureListe',JSON.stringify(captureList))
+  }
+//ajouter la persitance via une slice 
   const changeStateCapture=(state)=>{
     if(state){
       const tmptab = [...captureList]
@@ -34,19 +36,18 @@ export default function ButtonPokeball(props) {
 
   useEffect(()=>{
     console.log("capturelist",captureList)
-    if(captureList.length === 0){
-      // FetchCaptureListe()
+    if(firstTest){
+      FetchCaptureListe()
     }
+
     if(captureList.includes(number)){
       setcaptureState(true)
     }
     else{
       setcaptureState(false)
     }
-    console.log(captureList)
-  //   else{
-  //     setCaptureListAsync()
-  // }
+
+    setCaptureListAsync()
   },[number,captureList])
 
   return (
