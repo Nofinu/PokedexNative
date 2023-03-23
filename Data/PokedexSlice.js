@@ -16,7 +16,7 @@ const PokedexSlice = createSlice({
   name:"PokedexSlice",
   initialState:{
     pokedexList:[  
-      {id:1,area:'kanto',limit:'151',offset:'0',pokemonList:[]},
+      {id:1,area:'Kanto',limit:'151',offset:'0',pokemonList:[]},
       {id:2,area:'Johto',limit:'100',offset:'151',pokemonList:[]},
       {id:3,area:'Hoenn',limit:'135',offset:'251',pokemonList:[]},
       {id:4,area:'Sinnoh',limit:'107',offset:'386',pokemonList:[]},

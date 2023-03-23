@@ -4,6 +4,7 @@ import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchPokedex } from '../Data/PokedexSlice';
 import PokemonDisplay from '../Component/PokemonDisplay';
+import DarkModeComponent from '../Component/DarkModeComponent/DarkModeComponent';
 
 export default function PokedexPage({navigation,route}) {
 
@@ -25,10 +26,12 @@ export default function PokedexPage({navigation,route}) {
   },[])
 
   return (
-    <FlatList numColumns={3} data={pokedexFind.pokemonList} contentContainerStyle={styles.container}
-    renderItem={({item})=>{
-      return <PokemonDisplay pokemon={item}/>
-    }} keyExtractor={(item,index) => index}/>
+    <DarkModeComponent>
+      <FlatList numColumns={3} data={pokedexFind.pokemonList} contentContainerStyle={styles.container}
+      renderItem={({item})=>{
+        return <PokemonDisplay pokemon={item}/>
+      }} keyExtractor={(item,index) => index}/>
+    </DarkModeComponent>
   )
 }
 

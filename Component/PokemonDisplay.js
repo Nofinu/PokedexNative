@@ -1,10 +1,18 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, Image, ActivityIndicator, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getInfoPokemon } from '../Services/data.service'
+import { useNavigation } from '@react-navigation/native'
 
 export default function PokemonDisplay({pokemon}) {
 
+  const navigation = useNavigation()
+
   const [pokemonPics, setPokemonpics]=useState("")
+
+  const goToPokemon = ()=>{
+    const tmptab = pokemon.url.split('/')
+    navigation.navigate('pokemon',{idPokemon: Number(tmptab[tmptab.length-2]),pokemonName:pokemon.name})
+  }
 
   const fetchPokemonInfo = async ()=>{
     const response = await getInfoPokemon(pokemon.url)
@@ -18,17 +26,19 @@ export default function PokemonDisplay({pokemon}) {
   },[pokemonPics])
 
   return (
-    <View style={styles.container}>
-      {
-      pokemonPics !="" ?
-      <Image source={{uri:pokemonPics}} style={{width:120,height:120}}/>
-      :
-        <ActivityIndicator/>
-      }
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>{pokemon.name}</Text>
+    <Pressable onPress={goToPokemon}>
+      <View style={styles.container}>
+        {
+        pokemonPics !="" ?
+        <Image source={{uri:pokemonPics}} style={{width:120,height:120}}/>
+        :
+          <ActivityIndicator/>
+        }
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>{pokemon.name}</Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   )
 }
 
@@ -40,6 +50,7 @@ const styles = StyleSheet.create({
     marginTop:5,
     marginLeft:5,
     justifyContent:"space-around",
+    backgroundColor:"white",
   },
   textContainer:{
     height:35,
