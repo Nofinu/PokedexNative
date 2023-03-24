@@ -4,6 +4,7 @@ import DarkModeComponent from '../Component/DarkModeComponent/DarkModeComponent'
 import { getInfoPokemon } from '../Services/data.service'
 import { useNavigation } from '@react-navigation/native'
 import ButtonPokeball from '../Component/Button/ButtonPokeball'
+import ButtonChangePokemon from '../Component/Button/ButtonChangePokemon'
 
 export default function PokemonDisplayPage({route}) {
 
@@ -17,6 +18,14 @@ export default function PokemonDisplayPage({route}) {
   const fetchPokemonInfo = async ()=>{
     const response = await getInfoPokemon(url)
     setPokemonData(response)
+  }
+
+  const pokemonPlus=(number)=>{
+    setPokemonNumber(number+1)
+  }
+
+  const pokemonMinus=(number)=>{
+    setPokemonNumber(number-1)
   }
 
   const findType=(type)=>{
@@ -102,6 +111,10 @@ export default function PokemonDisplayPage({route}) {
           </View>
         </View>
       </View>
+      <View style={styles.arrowContainer}>
+        <ButtonChangePokemon text={"←"} onpress={pokemonMinus} pokemonNumber={pokemonNumber}/>
+        <ButtonChangePokemon text={"→"} onpress={pokemonPlus} pokemonNumber={pokemonNumber}/>
+      </View>
     </DarkModeComponent>
   )
 }
@@ -148,5 +161,11 @@ const styles = StyleSheet.create({
     textAlign:"center",
     fontSize:20,
     color:"black"
+  },
+  arrowContainer:{
+    width:"50%",
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-between"
   }
 })

@@ -27,7 +27,6 @@ export default function ButtonPokeball(props) {
 
 
 useLayoutEffect(() => {
-  console.log("pokelist", captureList)
   if (captureList !== undefined){
     if(captureList.find(poke => poke.number === number)){
       setcaptureState(true)
