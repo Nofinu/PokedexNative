@@ -4,7 +4,6 @@ import { getInfoPokemon } from '../Services/data.service'
 import { useNavigation } from '@react-navigation/native'
 
 export default function PokemonCapturedDisplay({pokemon}) {
-  console.log("captureddisplay",pokemon)
 
   const navigation = useNavigation()
 

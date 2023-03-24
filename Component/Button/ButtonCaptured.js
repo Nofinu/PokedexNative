@@ -9,7 +9,7 @@ export default function ButtonCaptured() {
   return (
     <Pressable style={styles.container} onPress={()=>navigation.navigate('captured')}>
       <View style={styles.innerContainer}>
-        <Text style={styles.text}>Captured </Text>
+        <Text style={styles.text}>Capturé  </Text>
         <Image source={{uri:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1200px-Pok%C3%A9_Ball_icon.svg.png"}} style={{height:40,width:40}} />
       </View>
     </Pressable>

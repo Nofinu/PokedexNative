@@ -1,5 +1,5 @@
 import { StyleSheet,Image,Pressable } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React  from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDarkMode } from '../../Data/DarkmodeSlice'
 

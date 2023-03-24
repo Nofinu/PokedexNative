@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 import React, { useEffect } from 'react'
 import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

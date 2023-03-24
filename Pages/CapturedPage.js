@@ -1,14 +1,12 @@
-import { StyleSheet, Text, FlatList } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import DarkModeComponent from '../Component/DarkModeComponent/DarkModeComponent'
-import {PokemonDisplay} from '../Component/PokemonDisplay'
 import PokemonCapturedDisplay from '../Component/PokemonCapturedDisplay'
 
 export default function CapturedPage() {
 
 const capturedList = useSelector(state => state.captureList.captureList)
-console.log(capturedList)
 
   return (
     <DarkModeComponent>
