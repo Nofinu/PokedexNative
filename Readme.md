@@ -27,7 +27,7 @@ on peux aussi lorsque l'on est sur un pokemon choisir si on l'a capturé ou pas 
 
 pokemon capturé:
 
-![](./Screenshoot/pokeball_Fill.png)
+![](./Screenshoot/pokeball_fill.png)
 
 pokemon pas capturé :
 
