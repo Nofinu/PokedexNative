@@ -29,7 +29,7 @@ export default function PokemonDisplay({pokemon}) {
     <Pressable onPress={goToPokemon}>
       <View style={styles.container}>
         {
-        pokemonPics !="" ?
+        pokemonPics != "" ?
         <Image source={{uri:pokemonPics}} style={{width:120,height:120}}/>
         :
           <ActivityIndicator/>

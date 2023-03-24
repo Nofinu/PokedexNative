@@ -1,12 +1,12 @@
 import { StyleSheet, Image, Pressable } from 'react-native'
 import React, {useState,useEffect,useLayoutEffect} from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useDispatch, useSelector } from 'react-redux'
-import { FetchCaptureList, SetCaptureList } from '../Data/CaptureSlice'
+import { FetchCaptureList, SetCaptureList } from '../../Data/CaptureSlice'
 
 export default function ButtonPokeball(props) {
 
   const number = props.number
+  const name = props.name
 
   const dispatch = useDispatch()
 
@@ -16,19 +16,20 @@ export default function ButtonPokeball(props) {
 
   const changeStateCapture=(statu)=>{
     if(statu){
-      const tmpList = [...captureList.filter(p=> p !== number)]
+      const tmpList = [...captureList.filter(p=> p.number !== number)]
       dispatch(SetCaptureList(tmpList))
     }
     else{
-      const tmpList = [...captureList,number]
+      const tmpList = [...captureList,{number:number,name:name}]
       dispatch(SetCaptureList(tmpList))
     }
   }
 
 
 useLayoutEffect(() => {
+  console.log("pokelist", captureList)
   if (captureList !== undefined){
-    if(captureList.includes(number)){
+    if(captureList.find(poke => poke.number === number)){
       setcaptureState(true)
     }
     else{

@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
     backgroundColor:"white"
   },
   height:{
-    height:"100%"
+    height:"100%",
+    justifyContent:"center",
+    alignItems:"center"
   }
 })

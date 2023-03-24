@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import DarkModeComponent from '../Component/DarkModeComponent/DarkModeComponent'
 import { getInfoPokemon } from '../Services/data.service'
 import { useNavigation } from '@react-navigation/native'
-import ButtonPokeball from '../Component/ButtonPokeball'
+import ButtonPokeball from '../Component/Button/ButtonPokeball'
 
 export default function PokemonDisplayPage({route}) {
 
@@ -66,7 +66,7 @@ export default function PokemonDisplayPage({route}) {
 
   useEffect(()=>{
     fetchPokemonInfo()
-    navigation.setOptions({headerRight:()=><ButtonPokeball number={pokemonNumber}/>})
+    navigation.setOptions({headerRight:()=><ButtonPokeball number={pokemonNumber} name={route.params.pokemonName}/>})
   },[pokemonNumber])
 
   return (
